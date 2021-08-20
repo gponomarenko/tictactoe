@@ -1,87 +1,122 @@
-import React from 'react';
+/* eslint-disable react/no-array-index-key */
+import './App.css';
+import React, { useState, useEffect } from 'react';
+import Square from './components/Square/Square';
+import Modal from './components/Modal/Modal';
+import Patterns from './patterns/Patterns';
+import { PlayersContext } from './components/PlayersContext/PlayersContext';
 
 function App() {
+  const [board, setBoard] = useState(Array(9).fill(''));
+  const [player, setPlayer] = useState('O');
+  const [result, setResult] = useState({ winner: 'none', state: 'none' });
+  const [modalActive, setModalActive] = useState(true);
+  const [players, setPlayers] = useState(['', '']);
+
+  useEffect(() => {
+    checkWin();
+    checkIfTie();
+    if (player === 'X') {
+      setPlayer('O');
+    } else {
+      setPlayer('X');
+    }
+  }, [board]);
+
+  useEffect(() => {
+    if (result.state !== 'none') {
+      alert(`Game Finished! Winning player: ${result.winner}`);
+    }
+  }, [result]);
+
+  const chooseSquare = (square) => {
+    setBoard(board.map((value, index) => {
+      if (index === square && value === '') {
+        return player;
+      }
+
+      return value;
+    }));
+  };
+
+  const checkWin = () => {
+    Patterns.forEach((currPattern) => {
+      const firstPlayer = board[currPattern[0]];
+
+      if (firstPlayer === '') return;
+      let foundWinningPattern = true;
+
+      currPattern.forEach((index) => {
+        if (board[index] !== firstPlayer) {
+          foundWinningPattern = false;
+          console.log(`pattern is not found`);
+        }
+      });
+      if (foundWinningPattern) {
+        setResult({ winner: player, state: 'won' });
+        console.log(`${player} won!`);
+      }
+    });
+  };
+
+  const checkIfTie = () => {
+    let filled = true;
+
+    board.forEach((square) => {
+      if (square === '') {
+        filled = false;
+      }
+    });
+    if (filled) {
+      setResult({ winner: 'No One', state: 'Tie' });
+      console.log('Tie!');
+    }
+  };
+
+  const restartGame = () => {
+    setBoard(Array(9).fill(''));
+  };
+
   return (
-    <section className="todoapp">
-      <header className="header">
-        <h1>todos</h1>
+    <PlayersContext.Provider
+      value={players}
+      setPlayers={setPlayers}
+    >
+    <div className="App">
+      <div className="frame">
+        <div className="board">
+          {board.map((v, i, ar) => (
+            <Square
+              key={i}
+              value={board[i]}
+              chooseSquare={() => {
+                chooseSquare(i);
+              }}
+            />
+          ))
+          }
+        </div>
+      </div>
 
-        <form>
-          <input
-            type="text"
-            className="new-todo"
-            placeholder="What needs to be done?"
-          />
-        </form>
-      </header>
-
-      <section className="main">
-        <input type="checkbox" id="toggle-all" className="toggle-all" />
-        <label htmlFor="toggle-all">Mark all as complete</label>
-
-        <ul className="todo-list">
-          <li>
-            <div className="view">
-              <input type="checkbox" className="toggle" />
-              <label>asdfghj</label>
-              <button type="button" className="destroy" />
-            </div>
-            <input type="text" className="edit" />
-          </li>
-
-          <li className="completed">
-            <div className="view">
-              <input type="checkbox" className="toggle" />
-              <label>qwertyuio</label>
-              <button type="button" className="destroy" />
-            </div>
-            <input type="text" className="edit" />
-          </li>
-
-          <li className="editing">
-            <div className="view">
-              <input type="checkbox" className="toggle" />
-              <label>zxcvbnm</label>
-              <button type="button" className="destroy" />
-            </div>
-            <input type="text" className="edit" />
-          </li>
-
-          <li>
-            <div className="view">
-              <input type="checkbox" className="toggle" />
-              <label>1234567890</label>
-              <button type="button" className="destroy" />
-            </div>
-            <input type="text" className="edit" />
-          </li>
-        </ul>
-      </section>
-
-      <footer className="footer">
-        <span className="todo-count">
-          3 items left
-        </span>
-
-        <ul className="filters">
-          <li>
-            <a href="#/" className="selected">All</a>
-          </li>
-
-          <li>
-            <a href="#/active">Active</a>
-          </li>
-
-          <li>
-            <a href="#/completed">Completed</a>
-          </li>
-        </ul>
-
-        <button type="button" className="clear-completed">
-          Clear completed
+      <div className="frame">
+        <button
+          className="button"
+          type="button"
+          onClick={restartGame}
+        >
+          Clear board
         </button>
-      </footer>
-    </section>
+        <button
+          className="button"
+          type="button"
+          onClick={() => setModalActive(true)}
+        >
+          Input new players
+        </button>
+      </div>
+      <Modal active={modalActive} setActive={setModalActive} />
+    </div>
+    </PlayersContext.Provider>
   );
 }
 
