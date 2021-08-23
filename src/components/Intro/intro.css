@@ -1,0 +1,23 @@
+.players {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.players__input {
+  width: calc(var(--side)*2);
+  height: calc(var(--side)/4);
+  margin-bottom: 12px;
+  border-radius: 8px;
+  text-align: center;
+  padding: 4px;
+}
+
+.players__submit {
+  width: var(--side);
+  height: calc(var(--side)/4);
+  margin-bottom: 12px;
+  border-radius: 8px;
+}

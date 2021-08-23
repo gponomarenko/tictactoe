@@ -1,40 +1,40 @@
 /* eslint-disable react/no-array-index-key */
 import './App.css';
 import React, { useState, useEffect, useCallback } from 'react';
-import Field from './components/Field/Field'
+import Field from './components/Field/Field';
 import Modal from './components/Modal/Modal';
 import Patterns from './patterns/Patterns';
 
 function App() {
   const [board, setBoard] = useState(Array(9).fill(''));
-  const [player, setPlayer] = useState('O');
+  const [symbol, setSymbol] = useState('O');
   const [result, setResult] = useState({ winner: 'none', state: 'none' });
   const [modalActive, setModalActive] = useState(true);
   const [name1, setName1] = useState('');
   const [name2, setName2] = useState('');
-  const [players, setPlayers] = useState([]);
+  const [player1, setPlayer1] = useState(null);
+  const [player2, setPlayer2] = useState(null);
+  const [win1, setWin1] = useState(0);
+  const [win2, setWin2] = useState(0);
   const [games, setGames] = useState(0);
 
   const gamesIncrease = useCallback(() => {
     setGames(games + 1);
   }, [result]);
 
-  // const changeScore = () => {
-  //   if (games % 2 === 0) {
-  //     setPlayers();
-  //   }
-
-  //   setPlayers([...players, players[1].wins + 1]);
-  // }
-
   const chooseField = (field) => {
     setBoard(board.map((value, index) => {
       if (index === field && value === '') {
-        return player;
+        return symbol;
       }
 
       return value;
     }));
+  };
+
+  const restartGame = () => {
+    setBoard(Array(9).fill(''));
+    setResult({ winner: 'none', state: 'none' });
   };
 
   const checkWin = useCallback(() => {
@@ -53,13 +53,25 @@ function App() {
         }
       });
       if (foundWinningPattern) {
-        setResult({ winner: player, state: 'won' });
-        console.log(`${player} won!`);
+        setResult({ winner: symbol, state: 'won' });
+        console.log(`${symbol} won!`);
         gamesIncrease();
-        // changeScore();
+
+        if (symbol === 'X') {
+          setWin1(win1 + 1);
+        } else {
+          setWin2(win2 + 1);
+        }
+        if (games % 2 === 0) {
+          setSymbol('X');
+        } else {
+          setSymbol('O');
+        }
+        restartGame();
+        console.log(`symbol after restart ${symbol}`);
       }
     });
-  }, [board, player]);
+  }, [board]);
 
   const checkIfTie = useCallback(() => {
     let filled = true;
@@ -72,20 +84,21 @@ function App() {
     if (filled) {
       setResult({ winner: 'No One', state: 'Tie' });
       gamesIncrease();
+      setWin1(win1 + 0.5);
+      setWin2(win2 + 0.5);
+      restartGame();
     }
   }, [board]);
-
-  const restartGame = () => {
-    setBoard(Array(9).fill(''));
-  };
 
   useEffect(() => {
     checkWin();
     checkIfTie();
-    if (player === 'X') {
-      setPlayer('O');
-    } else {
-      setPlayer('X');
+    if (result.state === 'none') {
+      if (symbol === 'X') {
+        setSymbol('O');
+      } else {
+        setSymbol('X');
+      }
     }
   }, [board]);
 
@@ -97,76 +110,55 @@ function App() {
 
   const submitPlayers = (event) => {
     event.preventDefault();
-    const player1 = {
-      name: name1,
-      wins: 0,
-    };
-
-    const player2 = {
-      name: name2,
-      wins: 0,
-    };
-
-    setPlayers(() => [player1, player2]);
+    setPlayer1(name1);
+    setPlayer2(name2);
     setName1('');
     setName2('');
     setModalActive(false);
-    console.log('non-active');
   };
 
   return (
     <div className="App">
-      <div className="frame">
-        <div className="board">
-          {board.map((v, i, ar) => (
-            <Field
-              key={i}
-              value={board[i]}
-              chooseField={() => {
-                chooseField(i);
-              }}
-            />
-          ))
-          }
+      <div className="container">
+        <div className="frame left">
+          <div className="board">
+            {board.map((v, i, ar) => (
+              <Field
+                className="field"
+                key={i}
+                value={board[i]}
+                chooseField={() => {
+                  chooseField(i);
+                }}
+              />
+            ))
+            }
+          </div>
         </div>
-      </div>
 
-      <div className="frame">
-        <p>
-          Score
-        </p>
-        <p>
-          {`${players.length && players[0].name}:
-          ${players.length && players[0].wins}`}
-        </p>
-        <p>
-          {`${players.length && players[1].name}:
-          ${players.length && players[1].wins}`}
-        </p>
-        <button
-          className="button"
-          type="button"
-          onClick={restartGame}
-        >
-          Clear board
-        </button>
-        <button
-          className="button"
-          type="button"
-          onClick={() => setModalActive(true)}
-        >
-          Set new players
-        </button>
+        <div className="frame right">
+          <p>
+            Score
+          </p>
+          <p>
+            {`${player1 && player1}:
+            ${win1 && win1}`}
+          </p>
+          <p>
+            {`${player2 && player2}:
+            ${win1 && win2}`}
+          </p>
+        </div>
+        <Modal
+          active={modalActive}
+          setActive={setModalActive}
+          submitPlayers={submitPlayers}
+          name1={name1}
+          name2={name2}
+          setName1={setName1}
+          setName2={setName2}
+        />
       </div>
-      <Modal
-        active={modalActive}
-        setActive={setModalActive}
-        submitPlayers={submitPlayers}
-        name1={name1}
-        name2={name2}
-        setName1={setName1}
-        setName2={setName2}
-      />
     </div>
   );
 }
