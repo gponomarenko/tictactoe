@@ -1,3 +1,5 @@
+@import url('../../App.css');
+
 .players {
   display: flex;
   flex-direction: column;
@@ -6,18 +8,28 @@
   height: 100%;
 }
 
+players__title {
+  text-align: center;
+}
+
 .players__input {
-  width: calc(var(--side)*2);
+  width: calc(var(--side)*4);
   height: calc(var(--side)/4);
-  margin-bottom: 12px;
+  margin-bottom: calc(var(--side)/4);
   border-radius: 8px;
   text-align: center;
   padding: 4px;
 }
 
-.players__submit {
-  width: var(--side);
-  height: calc(var(--side)/4);
-  margin-bottom: 12px;
+.players__input:focus-visible {
   border-radius: 8px;
+  background-color: var(--xo-color);
+  
+}
+
+.players__submit {
+  width: calc(var(--side)*2);
+  height: calc(var(--side)/2);
+  margin-bottom: calc(var(--side)/20);
+  border-radius: calc(var(--side)/20);
 }

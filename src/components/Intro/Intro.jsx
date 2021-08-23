@@ -14,24 +14,33 @@ function Intro({ submitPlayers, name1, name2, setName1, setName2 }) {
   return (
     <>
       <form className="players" onSubmit={submitPlayers}>
-        <h3>Input 1st player&apos;s name:</h3>
+        <label htmlFor="id-1st">
+          <h3 className="players__title">Input 1st player&apos;s name:</h3>
+        </label>
         <input
           className="players__input"
           type="text"
           name="name1"
           placeholder="1st player name"
+          id="id-1st"
           value={name1}
           onChange={handleChange1}
         />
-        <h3>Input 2d player&apos;s name:</h3>
+        <label htmlFor="id-2d">
+          <h3 className="players__title">
+            Input 2d player&apos;s name:
+          </h3>
+        </label>
         <input
           className="players__input"
           type="text"
           name="name2"
+          id="id-2d"
           placeholder="2d player name"
           value={name2}
           onChange={handleChange2}
         />
+
         <button
           className="players__submit"
           type="submit"

@@ -1,3 +1,5 @@
+@import url('../../App.css');
+
 .modal {
   height: 100vh;
   width: 100vw;
@@ -19,11 +21,11 @@
 }
 
 .modal__content {
-  padding: 20px;
-  border-radius: 12px;
+  padding: calc(var(--side) / 20);
+  border-radius: calc(var(--side) / 10);
   background-color: white;
-  width: calc(var(--side)*4);
-  height: calc(var(--side)*2);
+  width: calc(var(--side)*6);
+  height: calc(var(--side)*4);
   transform: scale(0.5);
   transition: all 0.4s ease;
 }

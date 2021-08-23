@@ -1,11 +1,16 @@
 :root {
-  --side: 200px;
+  --side: 80px;
   --background-main: #545f7d;
   --background-grid: #44425e;
   --xo-color: #c4c4c4;
   --grid-color: #a855c1;
   --win-color: #af3d38;
   --text-color: #f2f3f5;
+}
+
+p, h1, h2, h3 {
+  margin: 0;
+  padding: 0;
 }
 
 .App {

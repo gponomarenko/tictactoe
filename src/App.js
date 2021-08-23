@@ -34,7 +34,11 @@ function App() {
 
   const restartGame = () => {
     setBoard(Array(9).fill(''));
-    setResult({ winner: 'none', state: 'none' });
+    setResult(prevState => ({
+      ...prevState,
+      'winner': 'none',
+      'state': 'none'
+    }));
   };
 
   const checkWin = useCallback(() => {
@@ -53,8 +57,13 @@ function App() {
         }
       });
       if (foundWinningPattern) {
-        setResult({ winner: symbol, state: 'won' });
+        setResult(prevState => ({
+          ...prevState,
+          winner: symbol,
+          state: 'won',
+        }));
         console.log(`${symbol} won!`);
+        console.log(result.symbol, result.state);
         gamesIncrease();
 
         if (symbol === 'X') {
@@ -62,13 +71,17 @@ function App() {
         } else {
           setWin2(win2 + 1);
         }
-        if (games % 2 === 0) {
-          setSymbol('X');
-        } else {
-          setSymbol('O');
-        }
         restartGame();
         console.log(`symbol after restart ${symbol}`);
+        if (games % 2 === 0) {
+          setSymbol('X');
+          console.log('set x');
+        } else {
+          setSymbol('O');
+          console.log('set o');
+        }
+        restartGame();
+        console.log(`symbol after settings ${symbol}`);
       }
     });
   }, [board]);
@@ -100,7 +113,7 @@ function App() {
         setSymbol('X');
       }
     }
-  }, [board]);
+  }, [board, result]);
 
   useEffect(() => {
     if (result.state !== 'none') {
