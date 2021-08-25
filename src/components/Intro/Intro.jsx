@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './intro.css';
+import PT from 'prop-types';
 
-function Intro({ submitPlayers, name1, name2, setName1, setName2 }) {
-
+export const Intro = ({ submitPlayers, name1, name2, setName1, setName2 }) => {
   const handleChange1 = (e) => {
     setName1(e.target.value);
   };
@@ -25,6 +25,7 @@ function Intro({ submitPlayers, name1, name2, setName1, setName2 }) {
           id="id-1st"
           value={name1}
           onChange={handleChange1}
+          required
         />
         <label htmlFor="id-2d">
           <h3 className="players__title">
@@ -39,19 +40,25 @@ function Intro({ submitPlayers, name1, name2, setName1, setName2 }) {
           placeholder="2d player name"
           value={name2}
           onChange={handleChange2}
+          required
         />
 
         <button
           className="players__submit"
           type="submit"
-          // name="submitPlayers"
-
+          name="submitPlayers"
         >
           Start game
         </button>
       </form>
     </>
   );
-}
+};
 
-export default Intro;
+Intro.propTypes = {
+  submitPlayers: PT.func.isRequired,
+  name1: PT.string.isRequired,
+  name2: PT.string.isRequired,
+  setName1: PT.func.isRequired,
+  setName2: PT.func.isRequired,
+};

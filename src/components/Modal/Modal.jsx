@@ -1,9 +1,9 @@
 import React from 'react';
 import cn from 'classnames';
-import Intro from '../Intro/Intro';
+import { Intro } from '../Intro';
 import './modal.css';
 
-function Modal({ active, submitPlayers, name1, name2, setName1, setName2 }) {
+export const Modal = ({ active, submitPlayers, name1, name2, setName1, setName2 }) => {
   return (
     <div
       className={cn({
@@ -29,6 +29,4 @@ function Modal({ active, submitPlayers, name1, name2, setName1, setName2 }) {
       </div>
     </div>
   );
-}
-
-export default Modal;
+};

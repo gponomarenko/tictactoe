@@ -1,24 +1,26 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
-import '../../App.css';
 import './field.css';
 import cn from 'classnames';
+import PT from 'prop-types';
 
-function Field({ value, chooseField }) {
+export const Field = ({ value, chooseField }) => {
   return (
     <div
       className={
         cn({
           field: true,
-          grid: true,
-          x: value === 'X',
-          o: value === 'O',
+          'o-style': value === 'O',
+          'x-style': value === 'X',
         })
       }
       onClick={chooseField}
     />
   );
-}
+};
 
-export default Field;
+Field.propTypes = {
+  value: PT.string.isRequired,
+  chooseField: PT.func.isRequired,
+};

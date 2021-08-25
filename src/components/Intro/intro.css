@@ -1,5 +1,3 @@
-@import url('../../App.css');
-
 .players {
   display: flex;
   flex-direction: column;
@@ -8,8 +6,11 @@
   height: 100%;
 }
 
-players__title {
+.players__title {
   text-align: center;
+  line-height: calc(var(--side)/4);
+  height: calc(var(--side)/4);
+  font-size: calc(var(--side)/6);
 }
 
 .players__input {
@@ -24,12 +25,26 @@ players__title {
 .players__input:focus-visible {
   border-radius: 8px;
   background-color: var(--xo-color);
-  
+
 }
 
 .players__submit {
   width: calc(var(--side)*2);
   height: calc(var(--side)/2);
-  margin-bottom: calc(var(--side)/20);
-  border-radius: calc(var(--side)/20);
+  border-radius: calc(var(--side)/10);
+  cursor: pointer;
+  background-color: var(--win-color);
+  color: var(--text-color);
+  font-weight: 700;
+  transition: all 0.5s ease;
+}
+
+.players__submit:hover {
+  background-color: var(--grid-color);
+  color: var(--background-grid);
+}
+
+.players__submit:active {
+  background-color: var(--xo-color);
+  color: var(--win-color);
 }
