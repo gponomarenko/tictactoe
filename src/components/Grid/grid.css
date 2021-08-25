@@ -1,0 +1,37 @@
+.gridline {
+  content: '';
+  background-color: var(--grid-color);
+  position: absolute;
+  z-index: 1;
+  border-radius: calc(var(--side) / 20);
+}
+
+.gridline.vertical {
+  transform: translate(-50%);
+  width: calc(var(--side) / 20);
+  height: calc((var(--side) * 3) + calc(var(--side) / 10));
+  top: calc(var(--side) / -20);
+}
+
+.gridline.vertical.first {
+  left: var(--side);
+}
+
+.gridline.vertical.second {
+  left: calc(var(--side) * 2);
+}
+
+.gridline.horizontal {
+  transform: translate(0, -50%);
+  width: calc((var(--side) * 3) + calc(var(--side) / 10));
+  height: calc(var(--side) / 20);
+  left: calc(var(--side) / -20);
+}
+
+.gridline.horizontal.first {
+  top: var(--side);
+}
+
+.gridline.horizontal.second {
+  top: calc(var(--side) * 2);
+}

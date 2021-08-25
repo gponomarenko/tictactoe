@@ -1,0 +1,67 @@
+.winline {
+  content: '';
+  background-color: var(--win-color);
+  position: absolute;
+  z-index: 2;
+  border-radius: calc(var(--side) / 20);
+}
+
+.cs-036 {
+  transform: translate(-50%);
+  width: calc(var(--side) / 20);
+  height: calc((var(--side) * 3) - calc(var(--side) / 10));
+  top: calc(var(--side) / 20);
+  left: calc(var(--side) / 2);
+}
+
+.cs-147 {
+  transform: translate(-50%);
+  width: calc(var(--side) / 20);
+  height: calc((var(--side) * 3) - calc(var(--side) / 10));
+  top: calc(var(--side) / 20);
+  left: calc(var(--side) * 1.5);
+}
+
+.cs-258 {
+  transform: translate(-50%);
+  width: calc(var(--side) / 20);
+  height: calc((var(--side) * 3) - calc(var(--side) / 10));
+  top: calc(var(--side) / 20);
+  left: calc(var(--side) * 2.5);
+}
+
+.cs-012 {
+  transform: translate(0, -50%);
+  width: calc((var(--side) * 3) - calc(var(--side) / 10));
+  height: calc(var(--side) / 20);
+  top: calc(var(--side) / 2);
+  left: calc(var(--side) / 20);
+}
+
+.cs-345 {
+  transform: translate(0, -50%);
+  width: calc((var(--side) * 3) - calc(var(--side) / 10));
+  height: calc(var(--side) / 20);
+  top: calc(var(--side) * 1.5);
+  left: calc(var(--side) / 20);
+}
+
+.cs-678 {
+  transform: translate(0, -50%);
+  width: calc((var(--side) * 3) - calc(var(--side) / 10));
+  height: calc(var(--side) / 20);
+  top: calc(var(--side) * 2.5);
+  left: calc(var(--side) / 20);
+}
+
+.cs-0 {
+  content: 'Draw';
+  background-color: var(--win-color);
+  position: absolute;
+  z-index: 2;
+  border-radius: calc(var(--side) / 20);
+  width: var(--side);
+  height: var(--side);
+  top: calc(var(--side) * 1.5);
+  left: calc(var(--side) * 1.5);
+}
