@@ -1,0 +1,94 @@
+.field {
+  height: var(--side);
+  width: var(--side);
+  border: 3px solid var(--grid-color);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.field:hover {
+  background-color: rgba(227, 169, 253, 0.796);
+}
+
+.field:active {
+  background-color: rgba(38, 17, 196, 0.796);
+}
+
+.field:first-child,
+.field:nth-child(2),
+.field:nth-child(3) {
+  border-top: none;
+}
+
+.field:nth-child(3n + 1) {
+  border-left: none;
+}
+
+.field:nth-child(3n + 3),
+.field:nth-child(3n + 2),
+.field:nth-child(3n + 1) {
+  border-right: none;
+}
+
+.field:last-child,
+.field:nth-child(4),
+.field:nth-child(5),
+.field:nth-child(6),
+.field:nth-child(7),
+.field:nth-child(8) {
+  border-bottom: none;
+}
+
+.field.grid:nth-child(2)::before,
+.field.grid:nth-child(2)::after {
+  content: '';
+  background-color: var(--win-color);
+  position: absolute;
+  z-index: 1;
+  transform: translate(-50%);
+  width: 24px;
+  height: calc(var(--side) * 3 + 1px);
+  top: -4px;
+  left: 0;
+
+}
+
+.field.x::before,
+.field.x::after {
+  content: '';
+  width: calc(var(--mark)*0.05);
+  height: var(--mark);
+  background-color: var(--xo-color);
+  position: absolute;
+}
+
+.field.x::before {
+  transform: rotate(45deg);
+}
+
+.field.x::after {
+  transform: rotate(-45deg);
+}
+
+.field.o::before,
+.field.o::after {
+  content: '';
+  border-radius: 50%;
+
+  position: absolute;
+}
+
+.field.o::before {
+  width: var(--mark);
+  height: var(--mark);
+  background-color: var(--xo-color);
+}
+
+.field.o::after {
+  width: calc(var(--mark)*0.9);
+  height: calc(var(--mark)*0.9);
+  background-color: var(--background-grid);
+}

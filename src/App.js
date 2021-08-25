@@ -25,7 +25,7 @@ function App() {
   const chooseField = (field) => {
     setBoard(board.map((value, index) => {
       if (index === field && value === '') {
-        return symbol;
+        return (symbol);
       }
 
       return value;
@@ -107,10 +107,18 @@ function App() {
     checkWin();
     checkIfTie();
     if (result.state === 'none') {
-      if (symbol === 'X') {
-        setSymbol('O');
-      } else {
-        setSymbol('X');
+      switch (symbol) {
+        case 'X':
+          setSymbol('O');
+          break;
+
+        case 'O':
+          setSymbol('X');
+          break;
+
+        default:
+          setSymbol('X');
+          break;
       }
     }
   }, [board, result]);
@@ -134,10 +142,9 @@ function App() {
     <div className="App">
       <div className="container">
         <div className="frame left">
-          <div className="board">
+          <div className="board win">
             {board.map((v, i, ar) => (
               <Field
-                className="field"
                 key={i}
                 value={board[i]}
                 chooseField={() => {
@@ -150,19 +157,24 @@ function App() {
         </div>
 
         <div className="frame right">
-          <p>
+          <p className="frame__score">
             Score
           </p>
-          <p>
-            {`${player1 && player1}:
-            ${win1 && win1}`}
-          </p>
-          <p>
-            {`${player2 && player2}:
-            ${win1 && win2}`}
-          </p>
+          {player1 ? (
+            <p className="frame__score">
+              {`${player1 && player1}:
+              ${win1 && win1}`}
+            </p>
+          ) : (<p className="frame__score">Player: 0</p>)}
+          {player2 ? (
+            <p>
+              {`${player2 && player2}:
+              ${win2 && win2}`}
+            </p>
+          ) : (<p className="frame__score">Player2: 0</p>)}
+
         </div>
-        <Modal
+        {/* <Modal
           active={modalActive}
           setActive={setModalActive}
           submitPlayers={submitPlayers}
@@ -170,7 +182,7 @@ function App() {
           name2={name2}
           setName1={setName1}
           setName2={setName2}
-        />
+        /> */}
       </div>
     </div>
   );
