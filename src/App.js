@@ -47,6 +47,7 @@ function App() {
     setResult(null);
     setCombi([]);
     setWinStyle(null);
+    setSymbol('X');
   };
 
   const checkWin = useCallback(() => {
@@ -158,7 +159,9 @@ function App() {
 
   useEffect(() => {
     if (isNewGame) {
-      restartGame();
+      setTimeout(() => {
+        restartGame();
+      }, 2000);
     }
 
     return () => {
@@ -179,7 +182,7 @@ function App() {
     <div className="App">
       <div className="container">
         <div className="frame left">
-          {winStyle
+          {combi
             && <Combis winStyle={winStyle} />
           }
           <div className="board win">

@@ -8,9 +8,8 @@ export const Combis = ({ winStyle }) => {
   return (
     <>
       <div className={cn({
-        winline: winStyle && winStyle !== 'cs-0',
-        winStyle,
-      })}
+        winline: true,
+      }, winStyle)}
       />
     </>
   );
