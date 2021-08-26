@@ -47,7 +47,7 @@ function App() {
     setResult(null);
     setCombi([]);
     setWinStyle(null);
-    setSymbol('X');
+    setSymbol('O');
   };
 
   const checkWin = useCallback(() => {
@@ -159,9 +159,7 @@ function App() {
 
   useEffect(() => {
     if (isNewGame) {
-      setTimeout(() => {
-        restartGame();
-      }, 2000);
+      restartGame();
     }
 
     return () => {
