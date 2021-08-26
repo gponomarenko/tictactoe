@@ -1,13 +1,11 @@
 # Tic-tac-toe
-- A game with score table and a modal window for players
 - [DEMO LINK](https://gponomarenko.github.io/tictactoe/)
 
 ## Description
-
-An in-depth paragraph about your project and overview of use.
+- Tic-tac-toe game with score table and a modal window so the players can log in
 
 ## Local development
-VS Code
+* VS Code
 
 ### Dependencies
 * Node v12.16.3 and higher
@@ -21,5 +19,4 @@ VS Code
 * Run `npm start`
 
 ## Troubleshooting
-
-For any contributing or problem solving you could find me [here](https://www.linkedin.com/in/grygoriyponomarenko/) and [here](https://t.me/grygoriyponomarenko/)
+* For any contributing or problem solving you could find me [here](https://www.linkedin.com/in/grygoriyponomarenko/) and [here](https://t.me/grygoriyponomarenko/)
